@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 @Component
 @Scope("prototype")
-public class Data {
+public class Date {
     private String Today;
     private String Yesterday;
 
@@ -17,7 +17,7 @@ public class Data {
     private Calendar calendar;
 
     @Autowired
-    public Data(SimpleDateFormat simpleDateFormat, Calendar calendar) {
+    public Date(SimpleDateFormat simpleDateFormat, Calendar calendar) {
         this.simpleDateFormat = simpleDateFormat;
         this.calendar = calendar;
     }

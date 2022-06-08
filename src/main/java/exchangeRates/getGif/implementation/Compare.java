@@ -12,10 +12,10 @@ public class Compare {
 
     private RequestApiExchangeRate requestApi;
     private RequestApiGif requestGif;
-    private Data day;
+    private Date day;
 
     @Autowired
-    public Compare(RequestApiExchangeRate requestApi, RequestApiGif requestGif, Data day) {
+    public Compare(RequestApiExchangeRate requestApi, RequestApiGif requestGif, Date day) {
         this.requestApi = requestApi;
         this.requestGif = requestGif;
         this.day = day;
