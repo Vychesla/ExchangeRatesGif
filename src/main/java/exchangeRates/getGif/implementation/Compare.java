@@ -5,6 +5,7 @@ import exchangeRates.getGif.request.RequestApiExchangeRate;
 import exchangeRates.getGif.request.RequestApiGif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.time.*;
 
 //производит сравнение вчерашнего курса к сегодняшнему и возвращает ссылку на Gif
 @Component
@@ -12,20 +13,18 @@ public class Compare {
 
     private RequestApiExchangeRate requestApi;
     private RequestApiGif requestGif;
-    private Date day;
 
     @Autowired
-    public Compare(RequestApiExchangeRate requestApi, RequestApiGif requestGif, Date day) {
+    public Compare(RequestApiExchangeRate requestApi, RequestApiGif requestGif) {
         this.requestApi = requestApi;
         this.requestGif = requestGif;
-        this.day = day;
     }
 
 
     public String compareCurrency(String codeCurrency) throws JsonProcessingException {
         String gifHost;
-        double lastRates = requestApi.rates(codeCurrency, day.getYesterday());
-        double newRates = requestApi.rates(codeCurrency, day.getToday());
+        double lastRates = requestApi.rates(codeCurrency, LocalDate.now().minusDays(1).toString());
+        double newRates = requestApi.rates(codeCurrency, LocalDate.now().toString());
         if (newRates > lastRates){
             gifHost = requestGif.getGifRich();
         } else {
